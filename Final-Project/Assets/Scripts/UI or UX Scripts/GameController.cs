@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 
-    [Tooltip("This is the starting position of the sword. Just put in the Sword Starting Position game object that's attached to the Player.")]
-    public Transform swordStartPosition;
+    // Commenting this out for now since we might get an animation for this instead.
+    //[Tooltip("This is the starting position of the sword. Just put in the Sword Starting Position game object that's attached to the Player.")]
+    //public Transform swordStartPosition;
 
     [Tooltip("This is the sword that the player uses as their melee weapon.")]
     public GameObject sword;

@@ -31,7 +31,7 @@ public class Sword : MonoBehaviour
         
         if (other.CompareTag("BasicEnemy"))
         {
-            other.GetComponent<BasicEnemyController>().GetHitBySword();
+            other.GetComponent<TargetController>().GetHitBySword();
         }
 
         
