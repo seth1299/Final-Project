@@ -745,6 +745,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 80667298}
+    - target: {fileID: 4863632745019538098, guid: ad456b79b64177247818ed188ae50db5, type: 3}
+      propertyPath: m_text
+      value: 'Right click to switch between third and first person camera views.
+        Press Q to use your sword attack, E to use your ranged attack (consumes ammo,
+        can be restored via ammo packs), and R to use your magic restoration ability
+        (consumes mana, regenerates). Your magic restoration ability will NOT be
+        effective unless the enemy''s health is at 0. You can quit the game with
+        "ESC" and pause the game with "P".
+
+
+        Credits:
+
+        Art - Anna
+        Branch and Eric Savage
+
+        Code - Fisher Hensley and Seth Grimes
+
+        Tech
+        - Jessica Wise and Nafis Taylor'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863632745019538098, guid: ad456b79b64177247818ed188ae50db5, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 520
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863632745019538098, guid: ad456b79b64177247818ed188ae50db5, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863632745019538098, guid: ad456b79b64177247818ed188ae50db5, type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad456b79b64177247818ed188ae50db5, type: 3}
 --- !u!1001 &6012426656281097605
