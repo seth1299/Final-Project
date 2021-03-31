@@ -31,17 +31,10 @@ public class PauseMenuController : MonoBehaviour
         // game is already paused)
         if (Input.GetKeyDown(KeyCode.P))
         {
-            
             if (isPaused == true)
-            {
                 isPaused = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
             else if (isPaused == false)
-            {
                 isPaused = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
             if ( about )
                 about = false;
         }
@@ -90,10 +83,5 @@ public class PauseMenuController : MonoBehaviour
     public void SetAbout(bool value)
     {
         about = value;
-    }
-
-    public void Settings()
-    {
-        // Code to change to settings menu goes here
     }
 }

@@ -9,12 +9,28 @@ using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Tooltip("This is the CharacterController component attached to the player character. You can just drag the character onto this.")]
     public CharacterController controller;
+
+    [Tooltip("This is the speed of the player character, or how fast the character can walk.")]
     public float speed;
+<<<<<<< Updated upstream
     public bool aiming;
+=======
+    [HideInInspector]
+    public bool aiming = false;
+
+    [Tooltip("This is the arrow that the player's bow shoots.")]
+>>>>>>> Stashed changes
     public GameObject projectile1;
+
+    [Tooltip("This is the magical curing projectile that the player shoots.")]
     public GameObject projectile2;
+
+    [Tooltip("This is the camera that will be used for the third person view.")]
     public Camera thirdPersonCam;
+
+    [Tooltip("This is the camera that will be used for the first person view.")]
     public Camera firstPersonCam;
     public Text UI;
     private int ammo;
@@ -26,6 +42,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+<<<<<<< Updated upstream
+=======
+        gc = GameController.gc;
+        regenTimer = gc.GetRegenTimer();
+        manaMax = gc.GetManaMax();
+>>>>>>> Stashed changes
         Cursor.lockState = CursorLockMode.Locked;
         ammo = 10;
         mana = 20;
@@ -38,7 +60,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+<<<<<<< Updated upstream
         if (Input.GetKeyDown(KeyCode.P))
+=======
+        ammo = gc.GetAmmo();
+        mana = gc.GetMana();
+        if (Input.GetButtonDown("Pause Keyboard") || Input.GetButtonDown("Pause Controller"))
+>>>>>>> Stashed changes
             isPaused = !isPaused;
         if (!isPaused)
         {
@@ -49,14 +77,14 @@ public class PlayerController : MonoBehaviour
 
         UI.text = "Ammo : " + ammo + "\n" + "Mana : " + mana;
         
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetButtonDown("Right Click") || Input.GetButtonDown("Right Click Controller"))
         {
             CameraSwitch();
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && aiming == true|| Input.GetKeyDown(KeyCode.R) && aiming == true)
+        if ( ( ( Input.GetButtonDown("Ranged Attack Keyboard") || Input.GetButtonDown("Ranged Attack Controller") )  && aiming == true ) || ( ( Input.GetButtonDown("Cure Ability Keyboard") || Input.GetButtonDown("Cure Ability Controller") ) && aiming == true))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if ( Input.GetButtonDown("Ranged Attack Keyboard") || Input.GetButtonDown("Ranged Attack Controller") && aiming )
             {
                 if (ammo > 0)
                 {
@@ -66,7 +94,7 @@ public class PlayerController : MonoBehaviour
                     ammo--;
                 }
             }
-            else 
+            else if (aiming)
             {
                 if (mana >= 5)
                 {

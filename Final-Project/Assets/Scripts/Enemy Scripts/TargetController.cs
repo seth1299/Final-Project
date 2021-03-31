@@ -10,16 +10,15 @@ public class TargetController : MonoBehaviour
     [Tooltip("This is the text that the health will be displayed on.")]
     public TextMeshProUGUI healthText;
     [Tooltip("This is the Mesh Renderer component attached to the same game object you're putting this script on.")]
-    public Renderer rend;
-    [Tooltip("This is the material that the target will change to when it's 'cured'.")]
-    public Material material;
-
     private bool healed = false;
+<<<<<<< Updated upstream
 
     void Start()
     {
         rend = gameObject.GetComponent<Renderer>();
     }
+=======
+>>>>>>> Stashed changes
     
     void OnCollisionEnter(Collision hit)
     {
@@ -62,7 +61,11 @@ public class TargetController : MonoBehaviour
             StartCoroutine("GetHitBySwordForReal");
     }
 
+<<<<<<< Updated upstream
     public IEnumerator GetHitBySwordForReal()
+=======
+    public IEnumerator GetHitByBow()
+>>>>>>> Stashed changes
     {
         // This subtracts one from the enemy's current health and updates their health text accordingly.
         health--;
@@ -77,10 +80,23 @@ public class TargetController : MonoBehaviour
         yield return null;
     }
 
+<<<<<<< Updated upstream
+=======
+    // This handles the enemy getting hit by the sword. It shouldn't be a Coroutine, this is just a temporary fix.
+    public IEnumerator GetHitBySwordForReal()
+    {
+        // This subtracts one from the enemy's current health and updates their health text accordingly.
+        health--;
+        UpdateHealthText();
+
+        yield return null;
+    }
+
+    // This "heals" the enemy once the player sufficiently damages them.
+>>>>>>> Stashed changes
     public void GetHealed()
     {
         healed = true;
-        rend.material = material;
     }
 
     /*
@@ -106,7 +122,7 @@ public class TargetController : MonoBehaviour
             healthText.text = "Health: " + health;
         else if (health <= 0 && !healed)
         {
-            healthText.fontSize = 0.4f;
+            //healthText.fontSize = 0.4f;
             healthText.text = "Now's your chance, heal them with your magical ability!";
         }
         else
