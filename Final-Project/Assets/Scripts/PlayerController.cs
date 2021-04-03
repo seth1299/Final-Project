@@ -1,4 +1,4 @@
-/* Made by Fisher Hensley for Nine Lives Studio
+﻿/* Made by Fisher Hensley for Nine Lives Studio
    and UCF's DIG-4715 Class. Controls player
    movement. */
 using System.Collections;
@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        gc = GameController.gc;
         regenTimer = gc.GetRegenTimer();
         manaMax = gc.GetManaMax();
         Cursor.lockState = CursorLockMode.Locked;
@@ -42,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         ammo = gc.GetAmmo();
         mana = gc.GetMana();
-        if (Input.GetButtonDown("Pause Keyboard") || Input.GetButtonDown("Pause Controller"))
+        if (Input.GetKeyDown(KeyCode.P))
             isPaused = !isPaused;
         if (!isPaused)
         {
@@ -51,15 +50,14 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(new Vector3 (0, Input.GetAxis("Mouse X"), 0), Space.Self);
         moveDirect = transform.right * x + transform.forward * z;
         
-        if (Input.GetButtonDown("Right Click") || Input.GetButtonDown("Right Click Controller"))
+        if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Switching Camera");
             CameraSwitch();
         }
 
-        if ( ( Input.GetButtonDown("Ranged Attack Keyboard") || Input.GetButtonDown("Ranged Attack Controller") ) && aiming == true || ( Input.GetButtonDown("Cure Ability Keyboard") || Input.GetButtonDown("Cure Ability Controller")) && aiming == true)
+        if (Input.GetKeyDown(KeyCode.E) && aiming == true|| Input.GetKeyDown(KeyCode.R) && aiming == true)
         {
-            if ( Input.GetButtonDown("Ranged Attack Keyboard") || Input.GetButtonDown("Ranged Attack Controller") )
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 if (ammo > 0)
                 {

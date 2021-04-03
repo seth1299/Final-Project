@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -63,7 +63,8 @@ public class TargetController : MonoBehaviour
             StartCoroutine("GetHitBySwordForReal");
     }
 
-    public IEnumerator GetHitByBow()
+    // This handles the enemy getting hit by the sword.
+    public IEnumerator GetHitBySwordForReal()
     {
         // This subtracts one from the enemy's current health and updates their health text accordingly.
         health--;
@@ -76,16 +77,6 @@ public class TargetController : MonoBehaviour
             yield return null;
             yield return null;
         }
-        yield return null;
-    }
-
-    // This handles the enemy getting hit by the sword. It shouldn't be a Coroutine, this is just a temporary fix.
-    public IEnumerator GetHitBySwordForReal()
-    {
-        // This subtracts one from the enemy's current health and updates their health text accordingly.
-        health--;
-        UpdateHealthText();
-
         yield return null;
     }
 
