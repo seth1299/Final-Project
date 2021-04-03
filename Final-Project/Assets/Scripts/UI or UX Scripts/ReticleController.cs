@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ReticleController : MonoBehaviour
 {
+    [Tooltip("This is the player's game object.")]
     public GameObject player;
+    [Tooltip("This is the same canvas that you're putting this script on.")]
     public Canvas thisSameCanvas;
 
     void Update()
