@@ -5,12 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
     public float speed;
+    public float Health = 100f;
+    public float Mana = 100f;
     public bool aiming;
     public GameObject projectile1;
     public GameObject projectile2;
