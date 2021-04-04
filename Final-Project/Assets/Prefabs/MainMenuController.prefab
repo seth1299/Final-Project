@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a8a7559632c8a4f9bfd834aa9a8298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuCanvas: {fileID: 6012426656930236001, guid: 3565981b4a7d9fa438e87cc8dae3dc07, type: 3}
-  aboutMenuCanvas: {fileID: 2117069214334359265, guid: ad456b79b64177247818ed188ae50db5, type: 3}
+  mainMenuCanvas: {fileID: 0}
+  aboutMenuCanvas: {fileID: 0}

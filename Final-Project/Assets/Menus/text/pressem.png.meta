@@ -1,0 +1,262 @@
+fileFormatVersion: 2
+guid: 9d1aee8a3a9bd064d92e5f20dd16574e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 886568199848634109
+    second: pressem_0
+  - first:
+      213: 8640396439274645507
+    second: pressem_1
+  - first:
+      213: -6476840508611923471
+    second: pressem_2
+  - first:
+      213: 1757107668259376791
+    second: pressem_3
+  - first:
+      213: -6385410210013685798
+    second: pressem_4
+  - first:
+      213: 567168276768939583
+    second: pressem_5
+  - first:
+      213: 693380697502526220
+    second: pressem_6
+  - first:
+      213: -1690945644848364903
+    second: pressem_7
+  - first:
+      213: 6680826596681139273
+    second: pressem_8
+  - first:
+      213: -7147779274278834182
+    second: pressem_9
+  - first:
+      213: 2328583918748235706
+    second: pressem_10
+  - first:
+      213: -9068720279575423163
+    second: pressem_11
+  - first:
+      213: 2531367739741289920
+    second: pressem_12
+  - first:
+      213: 7661581321967200991
+    second: pressem_13
+  - first:
+      213: 595069584847816842
+    second: pressem_14
+  - first:
+      213: -8154939779948531598
+    second: pressem_15
+  - first:
+      213: 9128653081521519530
+    second: pressem_16
+  - first:
+      213: -670431043682590774
+    second: pressem_17
+  - first:
+      213: 6807419369233985848
+    second: pressem_18
+  - first:
+      213: -4885654336308606115
+    second: pressem_19
+  - first:
+      213: -6689034501970254310
+    second: pressem_20
+  - first:
+      213: 4352280570836218702
+    second: pressem_21
+  - first:
+      213: -2402385209766717968
+    second: pressem_22
+  - first:
+      213: 6997104119959027100
+    second: pressem_23
+  - first:
+      213: -6987239240649522801
+    second: pressem_24
+  - first:
+      213: 1987593248395528545
+    second: pressem_25
+  - first:
+      213: -4737459661856667354
+    second: pressem_26
+  - first:
+      213: -2326666452264322647
+    second: pressem_27
+  - first:
+      213: 6835906479901383804
+    second: pressem_28
+  - first:
+      213: -7115071384713289650
+    second: pressem_29
+  - first:
+      213: 1562884151650814389
+    second: pressem_30
+  - first:
+      213: -3803888240635738316
+    second: pressem_31
+  - first:
+      213: 3615899547335500960
+    second: pressem_32
+  - first:
+      213: 4536457923614539305
+    second: pressem_33
+  - first:
+      213: -4492764697712174640
+    second: pressem_34
+  - first:
+      213: 4544175720935381144
+    second: pressem_35
+  - first:
+      213: 4963215751478500556
+    second: pressem_36
+  - first:
+      213: -3275010120805667045
+    second: pressem_37
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pressem_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 760
+        width: 995
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df6a22d9419bd4c00800000000000000
+      internalID: 886568199848634109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pressem_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 583
+        width: 907
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 308e38168cad8e770800000000000000
+      internalID: 8640396439274645507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
