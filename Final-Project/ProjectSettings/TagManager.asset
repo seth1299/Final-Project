@@ -8,6 +8,9 @@ TagManager:
   - Projectile
   - BasicEnemy
   - Sword
+  - Terrain
+  - PowerUp
+  - Solid
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Terrain
   - 
   - 
   - 

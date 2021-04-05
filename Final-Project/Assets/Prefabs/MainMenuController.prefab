@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9207195857468198168}
-  - component: {fileID: 4792051710857085035}
+  - component: {fileID: 395013988702794873}
   m_Layer: 0
   m_Name: MainMenuController
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4792051710857085035
+--- !u!114 &395013988702794873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5179144094989094865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3105c50c12b6bd841b18bbd63513bad9, type: 3}
+  m_Script: {fileID: 11500000, guid: 06a8a7559632c8a4f9bfd834aa9a8298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuCanvas: {fileID: 0}
