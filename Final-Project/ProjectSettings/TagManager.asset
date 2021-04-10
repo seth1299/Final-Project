@@ -11,6 +11,9 @@ TagManager:
   - Terrain
   - PowerUp
   - Solid
+  - Dummy
+  - TutorialManager
+  - LevelController
   layers:
   - Default
   - TransparentFX
