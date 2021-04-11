@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,12 +37,12 @@ public class MouseLook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && !isPaused)
+        if ( ( Input.GetButtonDown("Pause Keyboard") || Input.GetButtonDown("Pause Controller")) && !isPaused)
         {
             Cursor.lockState = CursorLockMode.None;
             isPaused = true;
         }
-        else if (Input.GetKeyDown(KeyCode.P) && isPaused)
+        else if ( ( Input.GetButtonDown("Pause Keyboard") || Input.GetButtonDown("Pause Controller")) && isPaused)
         {
             Cursor.lockState = CursorLockMode.Locked;
             isPaused = false;

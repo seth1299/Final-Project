@@ -9,16 +9,18 @@ public class TargetController : MonoBehaviour
     public int health;
     [Tooltip("This is the text that the health will be displayed on.")]
     public TextMeshProUGUI healthText;
-    [Tooltip("This is the Mesh Renderer component attached to the same game object you're putting this script on.")]
-    private bool healed = false;
-<<<<<<< Updated upstream
 
-    void Start()
+    [Tooltip("This is the Game Controller's game object.")]
+    public GameObject gameController;
+
+    public GameObject ps;
+
+    private bool healed = false;
+
+    void Awake()
     {
-        rend = gameObject.GetComponent<Renderer>();
+        ps.SetActive(false);
     }
-=======
->>>>>>> Stashed changes
     
     void OnCollisionEnter(Collision hit)
     {
@@ -26,24 +28,20 @@ public class TargetController : MonoBehaviour
         {
             if (hit.gameObject.GetComponent<ProjectileController>().type == false && health > 0)
             {
-                Debug.Log("Ouchies!");
                 Destroy (hit.gameObject);
-                StartCoroutine("GetHitBySwordForReal");
-                // Code for the enemy getting hit would go here.
+                StartCoroutine("GetHitByArrow");
             }
             else if (hit.gameObject.tag == "Projectile" && hit.gameObject.GetComponent<ProjectileController>().type == true && health <= 0)
             {
-                Debug.Log("Poof!");
                 Destroy (hit.gameObject);
                 StartCoroutine("GetHealed");
                 // Code for the enemy being pacified would go here.
             }
         }
-        else if (hit.gameObject.tag == "Sword")
+        else if (hit.gameObject.tag == "Sword" && gameController.GetComponent<GameController>().GetIsSwinging())
         {
             if (health > 0)
             {
-                Debug.Log("Ouchies sword!");
                 StartCoroutine("GetHitBySwordForReal");
             }
         }
@@ -61,14 +59,22 @@ public class TargetController : MonoBehaviour
             StartCoroutine("GetHitBySwordForReal");
     }
 
-<<<<<<< Updated upstream
-    public IEnumerator GetHitBySwordForReal()
-=======
-    public IEnumerator GetHitByBow()
->>>>>>> Stashed changes
+    public IEnumerator GetHitByArrow()
     {
         // This subtracts one from the enemy's current health and updates their health text accordingly.
         health--;
+        
+        UpdateHealthText();
+
+        
+        yield return null;
+    }
+
+    public IEnumerator GetHitBySwordForReal()
+    {
+        // This subtracts one from the enemy's current health and updates their health text accordingly.
+        health--;
+
         UpdateHealthText();
 
         for (int i = 0; i < 60; i++)
@@ -77,44 +83,20 @@ public class TargetController : MonoBehaviour
             yield return null;
             yield return null;
         }
-        yield return null;
-    }
-
-<<<<<<< Updated upstream
-=======
-    // This handles the enemy getting hit by the sword. It shouldn't be a Coroutine, this is just a temporary fix.
-    public IEnumerator GetHitBySwordForReal()
-    {
-        // This subtracts one from the enemy's current health and updates their health text accordingly.
-        health--;
-        UpdateHealthText();
 
         yield return null;
     }
 
-    // This "heals" the enemy once the player sufficiently damages them.
->>>>>>> Stashed changes
     public void GetHealed()
     {
         healed = true;
-    }
 
-    /*
-    public IEnumerator GetHealed()
-    {
-        Debug.Log("Healing enemy...");
-        while (gameObject.GetComponent<Renderer>().material.color.a > 0)
-        {
-            Debug.Log(rend.material.color.a);
-            Color color = rend.material.color;
-            float fadeAmount = color.a - (1f * Time.deltaTime);
-            color = new Color(color.r, color.g, color.b, fadeAmount);
-            rend.material.color = color;
-            yield return null;
-        }
-        Debug.Log("Finished healing enemy...");
+        GetComponent<AudioSource>().Play();
+
+        ps.SetActive(true);
+
+        Destroy(gameObject, 0.15f);
     }
-    */
 
     private void UpdateHealthText()
     {

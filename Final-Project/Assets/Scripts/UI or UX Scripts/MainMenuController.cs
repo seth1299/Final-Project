@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,7 +21,7 @@ public class MainMenuController : MonoBehaviour
     // The StartGame() function loads the "Game" scene, which should be the actual game content.
     public void StartGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Tutorial");
     }
 
     // The About() function loads the "About" scene, which should contain the instructions for how to play the game.
@@ -49,7 +49,7 @@ public class MainMenuController : MonoBehaviour
     void Update()
     {
         // This code simply closes the application when the "ESC" key is pressed, as required in the "requirements for ALL games" section on Webcourses.
-        if (Input.GetKey("escape"))
+        if (Input.GetButtonDown("Quit Keyboard") || Input.GetButtonDown("Quit Controller") || Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
         }

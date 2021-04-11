@@ -1,11 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AboutMenuController : MonoBehaviour
 {
     [Tooltip("'pauseMenuCanvas' is the pauseMenuCanvas object that you want to control. In this case, it's the entire 'Pause Menu' pauseMenuCanvas since we want to reference those functions later.")]
-    public Canvas pauseMenuCanvas;
+    public Canvas pauseMenuCanvas, settingsCanvas;
     [Tooltip("'thisSameCanvas' is the same canvas that this script is on.")]
     public Canvas thisSameCanvas;
 
@@ -13,7 +14,7 @@ public class AboutMenuController : MonoBehaviour
     private PauseMenuController PMC;
 
     [Tooltip("'isInAboutMenu' tracks if the player is in the 'About' menu or not. 'true' if the player is in the 'About' menu, or 'false' otherwise.")]
-    public bool isInAboutMenu = false;
+    public bool isInAboutMenu = false, isInSettingsMenu = false;
 
     // Start() is called once at the beginning of the Scene load.
     void Start()
@@ -28,13 +29,27 @@ public class AboutMenuController : MonoBehaviour
     // Update is called once per frame.
     void Update()
     {
+        if ( SceneManager.GetActiveScene().name != "MainMenu" )
+        {
         // "isInAboutMenu" is set to the variable returned by the "GetIsInAboutMenu()" function from the "PauseMenuController" script that "PMC" is referencing. 
         // In short, this is just true if the player is in the "about" menu or false otherwise.
         isInAboutMenu = PMC.GetIsInAboutMenu();
+        isInSettingsMenu = PMC.GetIsInSettingsMenu();
+        }
         
         // This makes the About Menu visible if the player is in the about menu, otherwise it makes it invisible.
         if ( isInAboutMenu )
+        {
             thisSameCanvas.enabled = true;
+        if (settingsCanvas != null)
+            settingsCanvas.enabled = false;
+        }
+        else if ( isInSettingsMenu )
+        {
+        if (settingsCanvas != null)
+            settingsCanvas.enabled = true;
+        thisSameCanvas.enabled = false;
+        }
         else
             thisSameCanvas.enabled = false;
     }
@@ -42,5 +57,6 @@ public class AboutMenuController : MonoBehaviour
     public void ReturnToPauseMenu()
     {
         PMC.SetAbout(false);
+        PMC.SetSettings(false);
     }
 }

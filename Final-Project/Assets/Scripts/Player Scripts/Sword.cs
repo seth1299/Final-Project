@@ -4,45 +4,21 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {  
-
-    private Vector3 currentPosition;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Vector3 targetPosition = new Vector3(-0.453f, 0.82f, 1.014f);
-        //StartCoroutine("SwingSword");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        //currentPosition = gameObject.transform.position;
-
-        //currentPosition = currentPosition.RotateTowards(currentPosition, targetPosition);
-    }
-
+    [Tooltip("This is the game controller game object.")]
+    public GameObject gc;
     public void OnTriggerEnter(Collider other)
     {
         if (other != null)
         {
-
         
-        if (other.CompareTag("BasicEnemy"))
-        {
-            other.GetComponent<TargetController>().GetHitBySword();
-        }
-
-        
-
+            if (other.CompareTag("BasicEnemy"))
+                if (gc.GetComponent<GameController>().GetIsSwinging())
+                    other.GetComponent<TargetController>().GetHitBySword();
+            else if (other.CompareTag("Dummy"))
+                if (gc.GetComponent<GameController>().GetIsSwinging())
+                    other.GetComponent<Dummy>().GetHitBySword();
 
         }
     }
 
-    public IEnumerator SwingSword()
-    {
-        yield return null;
-        // Code goes here
-    }
 }

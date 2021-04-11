@@ -394,7 +394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Beta v0.1
+  m_text: Alpha v0.6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 572369880}
-    characterCount: 9
+    characterCount: 10
     spriteCount: 0
     spaceCount: 1
     wordCount: 3
@@ -562,6 +562,11 @@ PrefabInstance:
 --- !u!1 &620470472 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4185701634918152706, guid: cdf3702e63c8b63439a0ab7e0f53c950, type: 3}
+  m_PrefabInstance: {fileID: 620470471}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &620470473 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8695861094508058865, guid: cdf3702e63c8b63439a0ab7e0f53c950, type: 3}
   m_PrefabInstance: {fileID: 620470471}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &720754230
@@ -805,7 +810,7 @@ PrefabInstance:
     - target: {fileID: 6503983733408260272, guid: bc662304541f70a4bb8273ed104652a9, type: 3}
       propertyPath: sword
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 620470473}
     - target: {fileID: 6503983733408260273, guid: bc662304541f70a4bb8273ed104652a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 987.34674
@@ -1178,7 +1183,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520047730}
-  m_LocalRotation: {x: 0.16049768, y: 3.763647e-16, z: 1.1256194e-17, w: 0.9870362}
+  m_LocalRotation: {x: 0.1604977, y: 0, z: 0, w: 0.9870362}
   m_LocalPosition: {x: 0, y: 2.7, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
