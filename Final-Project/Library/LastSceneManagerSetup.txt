@@ -1,0 +1,25 @@
+sceneSetups:
+- path: Assets/Scenes/Tutorial.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
+- path: Assets/Scenes/BEGINNING_SCENE.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Defeat.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Terrain Builder.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Victory.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/MainMenu.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0

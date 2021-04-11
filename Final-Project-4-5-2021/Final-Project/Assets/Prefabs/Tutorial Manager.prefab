@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 615380035771459939}
   m_Layer: 0
   m_Name: Tutorial Manager
-  m_TagString: Untagged
+  m_TagString: TutorialManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,4 +48,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  waitTime: 2
+  gc: {fileID: 0}
