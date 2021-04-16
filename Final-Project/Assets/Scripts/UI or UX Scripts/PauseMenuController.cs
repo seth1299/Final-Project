@@ -26,7 +26,7 @@ public class PauseMenuController : MonoBehaviour
     // Update is called once per frame.
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Terrain Builder")
+        if (SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Defeat" && SceneManager.GetActiveScene().name != "Victory")
         {
         // This sets paused to true if it is currently false or vice versa. It also recognizes if the player is in the about menu and closes that out (only if the
         // game is already paused)

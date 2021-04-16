@@ -50,4 +50,17 @@ public class MouseLook : MonoBehaviour
 
 
     }
+
+    // This just returns the "mouseSensitivity" variable.
+    public float GetSensivity()
+    {
+        return mouseSensitivity;
+    }
+
+    // This just sets the "mouseSensitivity" variable to a new value.
+
+    public void SetSensitivity(float val)
+    {
+        mouseSensitivity = val;
+    }
 }

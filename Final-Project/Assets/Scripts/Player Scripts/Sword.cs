@@ -12,11 +12,16 @@ public class Sword : MonoBehaviour
         {
         
             if (other.CompareTag("BasicEnemy"))
+            {
                 if (gc.GetComponent<GameController>().GetIsSwinging())
                     other.GetComponent<TargetController>().GetHitBySword();
+            }
             else if (other.CompareTag("Dummy"))
+            {
+                Debug.Log("Hitting dummy");
                 if (gc.GetComponent<GameController>().GetIsSwinging())
                     other.GetComponent<Dummy>().GetHitBySword();
+            }
 
         }
     }

@@ -11,7 +11,7 @@ public class PotionController : MonoBehaviour
     }
     void OnTriggerEnter(Collider enteree)
     {
-        if (enteree.gameObject.tag == "Player")
+        if (enteree.gameObject.tag == "Player" && GameObject.FindWithTag("GameController").GetComponent<GameController>().GetHealth() < GameObject.FindWithTag("GameController").GetComponent<GameController>().GetHealthMax())
         {
             enteree.GetComponent<PlayerController>().OpenHealthMod(10);
             Destroy(gameObject);

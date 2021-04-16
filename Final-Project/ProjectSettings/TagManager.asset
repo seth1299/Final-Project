@@ -14,6 +14,8 @@ TagManager:
   - Dummy
   - TutorialManager
   - LevelController
+  - Quicksand
+  - Frozen Lake
   layers:
   - Default
   - TransparentFX

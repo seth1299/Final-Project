@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TargetController : MonoBehaviour
 {
@@ -13,12 +14,20 @@ public class TargetController : MonoBehaviour
     [Tooltip("This is the Game Controller's game object.")]
     public GameObject gameController;
 
+    [Tooltip("This is the particle system that goes 'poof' when the slime dies.")]
     public GameObject ps;
+
+    // This is the game object for the HasClearedLevelController script.
+    private GameObject hasClearedLevelController;
+
+    // This 
+    private bool touchingSolid = false;
 
     private bool healed = false;
 
     void Awake()
     {
+        hasClearedLevelController = GameObject.FindWithTag("LevelController");
         ps.SetActive(false);
     }
     
@@ -45,13 +54,39 @@ public class TargetController : MonoBehaviour
                 StartCoroutine("GetHitBySwordForReal");
             }
         }
+        else if (hit.gameObject.tag == "Terrain" || hit.gameObject.tag == "Solid")
+        {
+            touchingSolid = true;
+        }
+    }
+
+    void OnCollisionExit(Collision hit)
+    {
+        if (hit.gameObject.tag == "Terrain" || hit.gameObject.tag == "Solid")
+        {
+            touchingSolid = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateHealthText();
+
+        if (hasClearedLevelController.GetComponent<HasClearedLevelController>().hasBeatenFirstLevel && SceneManager.GetActiveScene().name == "Terrain Builder")
+        {
+            Destroy(gameObject);
+        }
+        else if (hasClearedLevelController.GetComponent<HasClearedLevelController>().hasBeatenSecondLevel && SceneManager.GetActiveScene().name == "Suspicious Sands")
+        {
+            Destroy(gameObject);
+        }
+        else if (hasClearedLevelController.GetComponent<HasClearedLevelController>().hasBeatenThirdLevel && SceneManager.GetActiveScene().name == "Powdery Peaks")
+        {
+            Destroy(gameObject);
+        }
     }
+    
 
     public void GetHitBySword()
     {
@@ -79,9 +114,12 @@ public class TargetController : MonoBehaviour
 
         for (int i = 0; i < 60; i++)
         {
+            if ( !touchingSolid )
+            {
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.125f);
             yield return null;
             yield return null;
+            }
         }
 
         yield return null;

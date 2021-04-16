@@ -13,9 +13,9 @@ public class Teleporter : MonoBehaviour
         if ( levelController.GetComponent<HasClearedLevelController>().GetTutorial() )
         {
                 if ( SceneManager.GetActiveScene().name == "Tutorial" )
-                    transform.position =  new Vector3 (216.26f, 1.17f, 82.6f);
+                    transform.position =  new Vector3 (217.19f, -0.64f, 83.73f);
                 else if ( SceneManager.GetActiveScene().name == "Terrain Builder" )
-                    transform.position =  new Vector3 (219.62f, 1.049f, 29f);
+                    transform.position =  new Vector3 (221.9635f, -0.5799999f, 27.29433f);
         }
         else
             transform.position = new Vector3 (10000f, 100000f, 10000f);

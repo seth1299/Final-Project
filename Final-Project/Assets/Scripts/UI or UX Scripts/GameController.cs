@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -44,42 +45,50 @@ public class GameController : MonoBehaviour
     [Tooltip("This is the animator component of the player's Sword.")]
     public Animator anim;
 
+    [Tooltip("This is the sound effect that the bow plays when shot.")]
     public AudioSource bow_SFX;
 
-    /*
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+    [Tooltip("This is the sound effect that the magic plays when cast.")]
+    public AudioSource magic_SFX;
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        string name = scene.name;
+    [Tooltip("This is how long the bow takes to cool down.")]
+    public float bowShotCooldown;
 
-        if ( name != "Victory" && name != "Defeat" )
-        {
-        Debug.Log("Not destroying on load...");
-        DontDestroyOnLoad(gameObject);
-        if (gc == null)
-        {
-            gc = this;
-        }
-        else if (gc != this)
-        {
-            gc.UpdateThisScript(this);
-            Destroy(gameObject);
-        }
-        }
-        else
-        {
-            //Destroy(gameObject);
-        }
-    }
+    [Tooltip("This is how long the magic takes to cool down.")]
+    public float magicCooldown;
 
-    */
+    // These are the time remaining for each mechanic. Basically, when you swing your sword, shoot your bow, or use your magic, this is how long until 
+    // they are cooled down and ready to use again.
+    private float bowShotCooldownTimeRemaining, swordCooldownTimeRemaining, magicCooldownTimeRemaining;
+
+    [Tooltip("This is the player's game object.")]
+    public GameObject player;
+
+    [Tooltip("This is the UI for the controls displayed on the game screen.")]
+    public GameObject[] controlsUI;
+
+    // These are the sliders for the UI elements.
+    public Slider healthBar, manaBar, swordUI, arrowUI, magicUI, ammoUI;
+
+    // These are the gradients for the UI elements.
+    public Gradient healthBarGradient, manaBarGradient;
+
+    // These are the "fill" images for the UI elements.
+    public Image healthBarFill, manaBarFill, swordFill, arrowFill, magicFill, ammoFill;
 
     void Awake()
     {
+        healthBar.maxValue = healthMax;
+        healthBar.value = healthMax;
+        healthBarFill.color = healthBarGradient.Evaluate(1f);
+        manaBar.maxValue = manaMax;
+        manaBar.value = manaMax;
+        manaBarFill.color = manaBarGradient.Evaluate(1f);
+        swordUI.maxValue = swordCooldown;
+        arrowUI.maxValue = bowShotCooldown;
+        magicUI.maxValue = magicCooldown;
+        ammoUI.maxValue = ammoMax;
+        ammoUI.value = ammoMax;
         StartCoroutine("CheckForGameOver");
         Cursor.lockState = CursorLockMode.None;
     }
@@ -108,62 +117,13 @@ public class GameController : MonoBehaviour
         sword.SetActive(false);
         bow.SetActive(false);
     }
-
-    public void SetClearedTutorial(bool val)
-    {
-        clearedTutorial = val;
-    }
-
-    public bool GetClearedTutorial()
-    {
-        return clearedTutorial;
-    }
-
-    public void HandleTutorial()
-    {
-        if (SceneManager.GetActiveScene().name == "Tutorial")
-        {
-            GameObject temp = GameObject.FindWithTag("Dummy");
-            GameObject temp2 = GameObject.FindWithTag("TutorialManager");
-
-            if (temp == null && temp2 == null)
-                SetClearedTutorial(true);
-        }
-    }
-
-    public void UpdateThisScript(GameController GC_Script)
-    {
-
-        ammo = GC_Script.ammo;
-        ammoMax = GC_Script.ammoMax;
-        ammoText = GC_Script.ammoText;
-        anim = GC_Script.anim;
-        bow = GC_Script.bow;
-        swordCooldown = GC_Script.swordCooldown;        
-        bow_SFX = GC_Script.bow_SFX;
-        gameOver = GC_Script.gameOver;
-        health = GC_Script.health;
-        isSwinging = GC_Script.isSwinging;
-        isPaused = GC_Script.isPaused;
-        justStarted = GC_Script.justStarted;
-        manaMax = GC_Script.manaMax;
-        mana = GC_Script.mana;
-        playerCuredAllEnemies = false;
-        playerIsDead = false;
-        regenTimer = GC_Script.regenTimer;
-        sword = GC_Script.sword;
-    }
-
     void Update()
-    {
-        if (SceneManager.GetActiveScene().name == "Tutorial")  
-            HandleTutorial();
-            
+    {    
         //Debug.Log(playerIsDead + ", " + playerCuredAllEnemies);
 
         //Debug.Log(( SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "Defeat"));
 
-        if ( ( !playerIsDead && !playerCuredAllEnemies ) && ( SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "Defeat") )
+        if ( ( !playerIsDead && ( !playerCuredAllEnemies || SceneManager.GetActiveScene().name == "Tutorial" ) ) && ( SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "Defeat") )
         {
 
         //Debug.Log("Working");
@@ -218,10 +178,63 @@ public class GameController : MonoBehaviour
     // This updates the ammo, mana, and health GUI to match the actual values for ammo and health.
     public void UpdateGUI()
     {
+
+        // This makes the UI controls automatically update based on if a controller is plugged in or not.
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            controlsUI[0].SetActive(false);
+            controlsUI[1].SetActive(false);
+            controlsUI[2].SetActive(false);
+            controlsUI[3].SetActive(true);
+            controlsUI[4].SetActive(true);
+            controlsUI[5].SetActive(true);
+        }
+        else
+        {
+            controlsUI[0].SetActive(true);
+            controlsUI[1].SetActive(true);
+            controlsUI[2].SetActive(true);
+            controlsUI[3].SetActive(false);
+            controlsUI[4].SetActive(false);
+            controlsUI[5].SetActive(false);
+        }
+
         if (ammoText != null)
         {
             ammoText.text = "Ammo : " + ammo + "\n" + "Mana : " + mana + "\n" + "Health : " + health;
         }
+
+        if ( isSwinging && swordCooldownTimeRemaining <= 0 )
+            swordCooldownTimeRemaining = swordCooldown;
+
+        if ( isSwinging )
+            swordCooldownTimeRemaining -= Time.deltaTime;
+
+        if ( swordCooldownTimeRemaining <= 0 )
+            swordCooldownTimeRemaining = 0;
+        
+        manaBar.value = mana;
+        manaBarFill.color = manaBarGradient.Evaluate(manaBar.normalizedValue);
+        swordUI.value = swordCooldownTimeRemaining;
+        
+
+        if (bowShotCooldown != 0)
+            bowShotCooldownTimeRemaining -= Time.deltaTime;
+
+        if (bowShotCooldownTimeRemaining < 0)
+            bowShotCooldownTimeRemaining = 0;
+
+        if (magicCooldown != 0)
+        {
+            magicCooldownTimeRemaining -= Time.deltaTime;
+        }
+
+        if (magicCooldownTimeRemaining < 0)
+            magicCooldownTimeRemaining = 0;
+
+        arrowUI.value = bowShotCooldownTimeRemaining;
+        magicUI.value = magicCooldownTimeRemaining;
+        ammoUI.value = ammo;
     }
 
     // This makes sure that the player's health, mana, and ammo don't exceed their maximum or minimum values.
@@ -313,6 +326,12 @@ public class GameController : MonoBehaviour
         return health;
     }
 
+    // GetHealthMax() returns the "health" variable.
+    public int GetHealthMax()
+    {
+        return healthMax;
+    }
+
     // GetManaMax() returns the "manaMax" variable.
     public int GetManaMax()
     {
@@ -335,12 +354,16 @@ public class GameController : MonoBehaviour
     public void SetMana(int value)
     {
         mana += value;
+        manaBar.value = mana;
+        manaBarFill.color = manaBarGradient.Evaluate(manaBar.normalizedValue);
     }
 
     // This changes the mana to the current mana plus whatever value is passed in the parameter.
     public void SetHealth(int value)
     {
         health += value;
+        healthBar.value = health;
+        healthBarFill.color = healthBarGradient.Evaluate(healthBar.normalizedValue);
     }
 
     // GetRegenTimer() returns the "regenTimer" variable.
@@ -373,8 +396,13 @@ public class GameController : MonoBehaviour
     // to shoot again.
     public void ShootBow()
     {
+        if ( bowShotCooldownTimeRemaining == 0 && GetAmmo() > 0 && player.GetComponent<PlayerController>().GetAiming())
+        {
+            bowShotCooldownTimeRemaining = bowShotCooldown;
+            bow_SFX.Play();
+        }
         // Figure out how to make this only play when the arrow shoots and not every time the button is pressed
-        bow_SFX.Play();
+        
         if (sword.activeSelf)
             sword.SetActive(false);
         if (!bow.activeSelf)
@@ -382,6 +410,12 @@ public class GameController : MonoBehaviour
     }
     public void DoMagic()
     {
+        if ( magicCooldownTimeRemaining == 0 && GetMana() >= 5 && player.GetComponent<PlayerController>().GetAiming())
+        {
+            magicCooldownTimeRemaining = magicCooldown;
+            magic_SFX.Play();
+        }
+
         if (sword.activeSelf)
             sword.SetActive(false);
         if (bow.activeSelf)

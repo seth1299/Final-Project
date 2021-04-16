@@ -16,6 +16,8 @@ public GameObject gc;
 private int popUpIndex;
 private GameObject levelController;
 
+public Canvas pauseMenuCanvas;
+
 void OnEnable()
 {
     SceneManager.sceneLoaded += OnSceneLoaded;
@@ -32,6 +34,10 @@ void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 void Update ()
 {
+    if ( !pauseMenuCanvas.GetComponent<PauseMenuController>().GetIsPaused() )
+    {
+
+    
     if (levelController.GetComponent<HasClearedLevelController>().GetTutorial())
     {
         for (int i = 0; i < popUps.Length; i++) 
@@ -61,7 +67,7 @@ void Update ()
         Destroy(gameObject);
     }
 
-
+    }
 }
 
 public int GetPopUpIndex()
