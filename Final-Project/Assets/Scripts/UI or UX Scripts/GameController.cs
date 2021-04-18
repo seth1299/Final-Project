@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -44,16 +45,79 @@ public class GameController : MonoBehaviour
     [Tooltip("This is the animator component of the player's Sword.")]
     public Animator anim;
 
+    [Tooltip("This is the sound effect that the bow plays when shot.")]
     public AudioSource bow_SFX;
 
+    [Tooltip("This is the sound effect that the magic plays when cast.")]
+    public AudioSource magic_SFX;
+
+    [Tooltip("This is how long the bow takes to cool down.")]
     public float bowShotCooldown;
 
-    private float bowShotCooldownTimeRemaining;
+    [Tooltip("This is how long the magic takes to cool down.")]
+    public float magicCooldown;
+
+    // These are the time remaining for each mechanic. Basically, when you swing your sword, shoot your bow, or use your magic, this is how long until 
+    // they are cooled down and ready to use again.
+    private float bowShotCooldownTimeRemaining, swordCooldownTimeRemaining, magicCooldownTimeRemaining;
+
+    [Tooltip("This is the player's game object.")]
+    public GameObject player;
+
+    [Tooltip("This is the UI for the controls displayed on the game screen.")]
+    public GameObject[] controlsUI;
+
+    // These are the sliders for the UI elements.
+    public Slider healthBar, manaBar, swordUI, arrowUI, magicUI, ammoUI;
+
+    // These are the gradients for the UI elements.
+    public Gradient healthBarGradient, manaBarGradient;
+
+    // These are the "fill" images for the UI elements.
+    public Image healthBarFill, manaBarFill, swordFill, arrowFill, magicFill, ammoFill;
+
+    [Tooltip("This is for displaying the name of the current level.")]
+    public TextMeshProUGUI currentLevelText;
+
+    // This just checks how many controllers are active.
+    private int joystickNamesLength = 0;
 
     void Awake()
     {
+        healthBar.maxValue = healthMax;
+        healthBar.value = healthMax;
+        healthBarFill.color = healthBarGradient.Evaluate(1f);
+        manaBar.maxValue = manaMax;
+        manaBar.value = manaMax;
+        manaBarFill.color = manaBarGradient.Evaluate(1f);
+        swordUI.maxValue = swordCooldown;
+        arrowUI.maxValue = bowShotCooldown;
+        magicUI.maxValue = magicCooldown;
+        ammoUI.maxValue = ammoMax;
+        ammoUI.value = ammoMax;
         StartCoroutine("CheckForGameOver");
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if ( SceneManager.GetActiveScene().name == "Terrain Builder" )
+        {
+            currentLevelText.text = "Current Level: Magician's Meadow";
+        }
+        else
+        {
+            currentLevelText.text = "Current Level: " + SceneManager.GetActiveScene().name;
+        }
     }
 
     public IEnumerator CheckForGameOver()
@@ -79,21 +143,15 @@ public class GameController : MonoBehaviour
         health = healthMax;
         sword.SetActive(false);
         bow.SetActive(false);
+        joystickNamesLength = Input.GetJoystickNames().Length;
     }
-
     void Update()
-    {     
-        if (bowShotCooldown != 0)
-            bowShotCooldownTimeRemaining -= Time.deltaTime;
-
-        if (bowShotCooldownTimeRemaining < 0)
-            bowShotCooldownTimeRemaining = 0;
-
+    {    
         //Debug.Log(playerIsDead + ", " + playerCuredAllEnemies);
 
         //Debug.Log(( SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "Defeat"));
 
-        if ( ( !playerIsDead && !playerCuredAllEnemies ) && ( SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "Defeat") )
+        if ( ( !playerIsDead && ( !playerCuredAllEnemies || SceneManager.GetActiveScene().name == "TutorialReal" ) ) && ( SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "Defeat") )
         {
 
         //Debug.Log("Working");
@@ -136,7 +194,7 @@ public class GameController : MonoBehaviour
         // This is for unequiping everything.
         if (Input.GetButtonDown("Unequip Everything Keyboard") || Input.GetButtonDown("Unequip Everything Controller") && !isSwinging)
         {
-            DoMagic();
+            UnequipEverything();
         }
 
         RegenerateMana();
@@ -148,10 +206,63 @@ public class GameController : MonoBehaviour
     // This updates the ammo, mana, and health GUI to match the actual values for ammo and health.
     public void UpdateGUI()
     {
+
+        // This makes the UI controls automatically update based on if a controller is plugged in or not.
+        if (joystickNamesLength > 0)
+        {
+            controlsUI[0].SetActive(false);
+            controlsUI[1].SetActive(false);
+            controlsUI[2].SetActive(false);
+            controlsUI[3].SetActive(true);
+            controlsUI[4].SetActive(true);
+            controlsUI[5].SetActive(true);
+        }
+        else
+        {
+            controlsUI[0].SetActive(true);
+            controlsUI[1].SetActive(true);
+            controlsUI[2].SetActive(true);
+            controlsUI[3].SetActive(false);
+            controlsUI[4].SetActive(false);
+            controlsUI[5].SetActive(false);
+        }
+
         if (ammoText != null)
         {
             ammoText.text = "Ammo : " + ammo + "\n" + "Mana : " + mana + "\n" + "Health : " + health;
         }
+
+        if ( isSwinging && swordCooldownTimeRemaining <= 0 )
+            swordCooldownTimeRemaining = swordCooldown;
+
+        if ( isSwinging )
+            swordCooldownTimeRemaining -= Time.deltaTime;
+
+        if ( swordCooldownTimeRemaining <= 0 )
+            swordCooldownTimeRemaining = 0;
+        
+        manaBar.value = mana;
+        manaBarFill.color = manaBarGradient.Evaluate(manaBar.normalizedValue);
+        swordUI.value = swordCooldownTimeRemaining;
+        
+
+        if (bowShotCooldown != 0)
+            bowShotCooldownTimeRemaining -= Time.deltaTime;
+
+        if (bowShotCooldownTimeRemaining < 0)
+            bowShotCooldownTimeRemaining = 0;
+
+        if (magicCooldown != 0)
+        {
+            magicCooldownTimeRemaining -= Time.deltaTime;
+        }
+
+        if (magicCooldownTimeRemaining < 0)
+            magicCooldownTimeRemaining = 0;
+
+        arrowUI.value = bowShotCooldownTimeRemaining;
+        magicUI.value = magicCooldownTimeRemaining;
+        ammoUI.value = ammo;
     }
 
     // This makes sure that the player's health, mana, and ammo don't exceed their maximum or minimum values.
@@ -212,13 +323,27 @@ public class GameController : MonoBehaviour
     {
         if ( playerIsDead )
         {
+
             Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("Defeat");
+
+            if ( SceneManager.GetActiveScene().name == "Terrain Builder" )
+            {
+                SceneManager.LoadScene("Terrain Builder");
+            }
+            else if ( SceneManager.GetActiveScene().name == "Powdery Peaks" )
+            {
+                SceneManager.LoadScene("Powdery Peaks");
+            }
+            else if ( SceneManager.GetActiveScene().name == "Suspicious Sands" )
+            {
+                SceneManager.LoadScene("Suspicious Sands");
+            }
+
         }
-        else if ( playerCuredAllEnemies && SceneManager.GetActiveScene().name != "Tutorial")
+        else if ( playerCuredAllEnemies && SceneManager.GetActiveScene().name != "TutorialReal")
         {
             Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("Victory");
+            SceneManager.LoadScene("TutorialReal");
         }
     }
 
@@ -243,6 +368,12 @@ public class GameController : MonoBehaviour
         return health;
     }
 
+    // GetHealthMax() returns the "health" variable.
+    public int GetHealthMax()
+    {
+        return healthMax;
+    }
+
     // GetManaMax() returns the "manaMax" variable.
     public int GetManaMax()
     {
@@ -265,12 +396,16 @@ public class GameController : MonoBehaviour
     public void SetMana(int value)
     {
         mana += value;
+        manaBar.value = mana;
+        manaBarFill.color = manaBarGradient.Evaluate(manaBar.normalizedValue);
     }
 
     // This changes the mana to the current mana plus whatever value is passed in the parameter.
     public void SetHealth(int value)
     {
         health += value;
+        healthBar.value = health;
+        healthBarFill.color = healthBarGradient.Evaluate(healthBar.normalizedValue);
     }
 
     // GetRegenTimer() returns the "regenTimer" variable.
@@ -303,7 +438,7 @@ public class GameController : MonoBehaviour
     // to shoot again.
     public void ShootBow()
     {
-        if ( bowShotCooldownTimeRemaining == 0 )
+        if ( bowShotCooldownTimeRemaining == 0 && GetAmmo() > 0 && player.GetComponent<PlayerController>().GetAiming())
         {
             bowShotCooldownTimeRemaining = bowShotCooldown;
             bow_SFX.Play();
@@ -316,6 +451,21 @@ public class GameController : MonoBehaviour
             bow.SetActive(true);
     }
     public void DoMagic()
+    {
+        if ( magicCooldownTimeRemaining == 0 && GetMana() >= 5 && player.GetComponent<PlayerController>().GetAiming())
+        {
+            SetMana(-5);
+            magicCooldownTimeRemaining = magicCooldown;
+            magic_SFX.Play();
+        }
+
+        if (sword.activeSelf)
+            sword.SetActive(false);
+        if (bow.activeSelf)
+            bow.SetActive(false);
+    }
+
+    public void UnequipEverything()
     {
         if (sword.activeSelf)
             sword.SetActive(false);

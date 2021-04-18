@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -12,8 +14,11 @@ public class MainMenuController : MonoBehaviour
     [Tooltip("'mainMenuCanvas' is the Canvas for the Main Menu. 'aboutMenuCanvas' is the Canvas for the About Menu inside of the Main Menu.")]
     public Canvas mainMenuCanvas, aboutMenuCanvas;
 
+    private static GameObject hasClearedLevelController;
+
     void Start()
     {
+        hasClearedLevelController = GameObject.FindWithTag("LevelController");
         menuSelector = 0;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -21,7 +26,7 @@ public class MainMenuController : MonoBehaviour
     // The StartGame() function loads the "Game" scene, which should be the actual game content.
     public void StartGame()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("TutorialReal");
     }
 
     // The About() function loads the "About" scene, which should contain the instructions for how to play the game.
@@ -43,7 +48,23 @@ public class MainMenuController : MonoBehaviour
 
     public void Exit()
     {
+        hasClearedLevelController.GetComponent<HasClearedLevelController>().SaveData();
         Application.Quit();
+    }
+    public static void DeleteData()
+    {
+        string path = Application.persistentDataPath + SaveSystem.filePathName;
+        if (File.Exists(path))
+        {
+                File.Delete(path);
+                Debug.Log("Successfully deleted the file path " + path);
+        }
+        else
+        {
+            Debug.LogError("Could not delete the file path " + path);
+        }
+        
+        hasClearedLevelController.GetComponent<HasClearedLevelController>().ResetValues();
     }
 
     void Update()

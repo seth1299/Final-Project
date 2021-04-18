@@ -1,4 +1,4 @@
-﻿/* Made by Fisher Hensley and Seth Grimes for Nine Lives Studio
+/* Made by Fisher Hensley and Seth Grimes for Nine Lives Studio
    and UCF's DIG-4715 Class. Controls player
    movement. */
 using System.Collections;
@@ -57,8 +57,9 @@ public class PlayerController : MonoBehaviour
     // This is the move direction of the player.
     private Vector3 moveDirect;
 
-    // This tracks if the game is paused or not.
-    private bool isPaused = false;
+    // "isPaused" tracks if the game is paused or not, "canBeHit" tracks if the player can be hit, and "touchingQuicksand" tracks if the player is touching Quicksand.
+    // "touchingFrozenLake" tracks if the player is touching the frozen lake.
+    private bool isPaused = false, canBeHit = true, touchingQuicksand = false, touchingFrozenLake = false;
 
     public GameObject GameController;
     private GameController gc;
@@ -66,6 +67,8 @@ public class PlayerController : MonoBehaviour
     private bool touchingSolid;
 
     public Animator anim;
+
+    public Camera cam;
 
     void Awake()
     {
@@ -102,12 +105,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // This handles the bow shot cooldown.
         if (bowShotCooldown != 0)
             bowShotCooldownTimeRemaining -= Time.deltaTime;
 
         if (bowShotCooldownTimeRemaining < 0)
             bowShotCooldownTimeRemaining = 0;
 
+        // This makes sure that the "ammo" and "mana" variables are set to the GameController's "ammo" and "mana" values.
         ammo = gc.GetAmmo();
 
         mana = gc.GetMana();
@@ -119,13 +124,32 @@ public class PlayerController : MonoBehaviour
         
         {
 
-        float x = Input.GetAxis ("Horizontal");
+        float c = 2f, v = 2f, x = 2f, z = 2f;
 
-        float z = Input.GetAxis ("Vertical");
+        c = Input.GetAxis ("Horizontal");
+
+        v = Input.GetAxis ("Vertical");
+
+        x = Input.GetAxis ("Horizontal Controller");
+
+        z = Input.GetAxis ("Vertical Controller");
+
+        //Debug.Log(x + ", " + v + ", " + ", " + x + ", " + z);
 
         transform.Rotate(new Vector3 (0, Input.GetAxis("Mouse X"), 0), Space.Self);
 
-        moveDirect = transform.right * x + transform.forward * z;
+        //Input.GetJoystickNames().Length > 0
+
+        if ( x != 0 || z != 0 )
+        {
+            moveDirect = transform.right * x + transform.forward * z;
+        }
+        else
+        {
+            moveDirect = transform.right * c + transform.forward * v;
+        }
+
+        
         
         if (Input.GetButtonDown("Right Click") || Input.GetButtonDown("Right Click Controller"))
         {
@@ -145,8 +169,10 @@ public class PlayerController : MonoBehaviour
                     gc.SetAmmo(-1);
                     
                     GameObject projectileShot = Instantiate(projectile1, transform.position + transform.forward, Quaternion.identity);
+
+                    projectileShot.transform.rotation = Quaternion.FromToRotation(Vector3.right, transform.forward);
                     
-                    projectileShot.transform.Rotate(80f, 180f, 150f);
+                    //projectileShot.transform.Rotate(80f, 180f, 150f);
                     
                     ProjectileController projectileActive = projectileShot.GetComponent<ProjectileController>();
                     
@@ -159,9 +185,7 @@ public class PlayerController : MonoBehaviour
             {
 
                 if (mana >= 5 && aiming)
-                {
-                    gc.SetMana(-5);
-                    
+                {                    
                     GameObject projectileShot = Instantiate(projectile2, transform.position + transform.forward, Quaternion.Euler(new Vector3(0, transform.rotation.x, 0)));
                     
                     ProjectileController projectileActive = projectileShot.GetComponent<ProjectileController>();
@@ -189,9 +213,11 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        // This makes sure the player never floats in the air and continuously falls to the ground (if they're not already touching the ground)
+
         if (!touchingSolid)
         {
-            controller.Move(Vector3.down * Time.deltaTime);
+            controller.Move(Vector3.down * Time.deltaTime * 3);
         }
 
         }
@@ -200,11 +226,16 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPaused)
         {
-            if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
-            anim.SetInteger("State", 0);
-            else
-            anim.SetInteger("State", 1);
-            controller.Move(moveDirect * speed * Time.deltaTime);
+            if ( ( Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0 ) && ( Input.GetAxisRaw("Horizontal Controller") == 0 && Input.GetAxisRaw("Vertical Controller") == 0 ))
+            {
+                anim.SetInteger("State", 0);
+            }
+            else if ( canBeHit )
+            {
+                anim.SetInteger("State", 1);
+            }
+            
+            controller.Move(moveDirect * speed * Time.fixedDeltaTime);
         }
     }
     public bool GetAiming()
@@ -242,10 +273,10 @@ public class PlayerController : MonoBehaviour
 
         else if (entered.gameObject.tag == "Ammunition")
         {
-            ammo++;
+            gc.SetAmmo(1);
             Destroy(entered.gameObject);
         }
-        else if (entered.gameObject.tag == "BasicEnemy" && this.gameObject.tag != "Sword")
+        else if (entered.gameObject.tag == "BasicEnemy" && this.gameObject.tag != "Sword" && canBeHit)
         {
             gc.SetHealth(-1);
 
@@ -260,6 +291,16 @@ public class PlayerController : MonoBehaviour
             StartCoroutine("PowerupTime");
             Destroy(entered.gameObject);
         }
+        else if (entered.gameObject.tag == "Quicksand")
+        {
+            touchingQuicksand = true;
+            StartCoroutine("Quicksand");
+        }
+        else if (entered.gameObject.tag == "Frozen Lake")
+        {
+            touchingFrozenLake = true;
+            StartCoroutine("FrozenLake");
+        }
         else
         {
 
@@ -272,18 +313,74 @@ public class PlayerController : MonoBehaviour
         {
             touchingSolid = false;
         }
+        else if (other.gameObject.tag == "Quicksand")
+        {
+            touchingQuicksand = false;
+        }
+        else if (other.gameObject.tag == "Frozen Lake")
+        {
+            touchingFrozenLake = false;
+        }
     }
 
     public IEnumerator Knockback()
     {
         anim.SetBool("Hit", true);
+        canBeHit = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        /*
         for (int i = 0; i < 120; i++)
             {
                 gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.125f);
                 yield return null;
                 yield return null;
             }
+        */
+        canBeHit = true;
         anim.SetBool("Hit", false);
+        yield return null;
+    }
+
+    public IEnumerator Quicksand()
+    {
+        float tempSpeed = speed, tempMouseLook = cam.GetComponent<MouseLook>().GetSensivity();
+
+        cam.GetComponent<MouseLook>().SetSensitivity(tempMouseLook / 40);
+
+        speed *= 0.25f;
+
+        while ( touchingQuicksand && !powerUp )
+        {
+            yield return null;
+        }
+
+        cam.GetComponent<MouseLook>().SetSensitivity(tempMouseLook);
+
+        speed = tempSpeed;
+
+        yield return null;
+    }
+
+    public IEnumerator FrozenLake()
+    {
+        float tempSpeed = speed, tempMouseLook = cam.GetComponent<MouseLook>().GetSensivity();
+
+        cam.GetComponent<MouseLook>().SetSensitivity(tempMouseLook * 6);
+
+        speed *= 3f;
+
+        while ( touchingFrozenLake && !powerUp )
+        {
+            yield return null;
+        }
+
+        speed = tempSpeed;
+
+        cam.GetComponent<MouseLook>().SetSensitivity(tempMouseLook);
+
+        yield return null;
     }
     public void Snare()
     {
@@ -294,6 +391,11 @@ public class PlayerController : MonoBehaviour
     public void OpenHealthMod(int healthMod)
     {
         gc.SetHealth(healthMod);
+    }
+
+    public void SetMana(int value)
+    {
+        gc.SetMana(value);
     }
 
     IEnumerator Stun()

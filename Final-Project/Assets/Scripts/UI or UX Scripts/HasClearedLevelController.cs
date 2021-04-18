@@ -5,19 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class HasClearedLevelController : MonoBehaviour
 {
-    private bool hasBeatenTutorial, hasBeatenFirstLevel, hasBeatenSecondLevel, hasBeatenThirdLevel;
+    public bool hasBeatenTutorial = false, hasBeatenFirstLevel = false, hasBeatenSecondLevel = false, hasBeatenThirdLevel = false;
     private string name = "";
 
     void Awake()
     {
         if (SceneManager.GetActiveScene().name == "BEGINNING_SCENE")
+        {
+            LoadData();
             SceneManager.LoadScene("MainMenu");
-        Debug.Log("Setting tutorial values");
-        hasBeatenTutorial = false;
-        hasBeatenFirstLevel = false;
-        hasBeatenSecondLevel = false;
-        hasBeatenThirdLevel = false;
+        }
+
         DontDestroyOnLoad(this);
+    }
+    public void SaveData()
+    {
+        SaveSystem.SaveData(this);
+    }
+
+    public void LoadData()
+    {
+        GameData data = SaveSystem.LoadData();
+        if (data != null)
+        {
+        hasBeatenTutorial = data.hasBeatenTutorial;
+        hasBeatenFirstLevel = data.hasBeatenFirstLevel;
+        hasBeatenSecondLevel = data.hasBeatenSecondLevel;
+        hasBeatenThirdLevel = data.hasBeatenThirdLevel;
+        }
     }
     void OnEnable()
     {
@@ -31,19 +46,22 @@ public class HasClearedLevelController : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         name = scene.name;
-
-        if (name != "DontDestroyOnLoad")
-            Debug.Log(hasBeatenTutorial + ", " +hasBeatenFirstLevel);
+        SaveData();
+        if ( hasBeatenTutorial && hasBeatenFirstLevel && hasBeatenSecondLevel && hasBeatenThirdLevel && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            SceneManager.LoadScene("Victory");
+        }
     }
 
     void Update()
     {
         GameObject temp = GameObject.FindWithTag("Dummy");
         GameObject temp2 = GameObject.FindWithTag("BasicEnemy");
+        GameObject temp3 = GameObject.FindWithTag("TutorialManager");            
 
         if (temp == null && temp2 == null)
         {
-            if ( name == "Tutorial" )
+            if ( name == "TutorialReal" && temp3 == null)
             {
                 hasBeatenTutorial = true;
             }
@@ -74,7 +92,20 @@ public class HasClearedLevelController : MonoBehaviour
 
     public bool GetSecondLevel()
     {
-        return hasBeatenTutorial;
+        return hasBeatenSecondLevel;
+    }
+
+    public bool GetThirdLevel()
+    {
+        return hasBeatenThirdLevel;
+    }
+
+    public void ResetValues()
+    {
+        hasBeatenTutorial = false;
+        hasBeatenFirstLevel = false;
+        hasBeatenSecondLevel = false;
+        hasBeatenThirdLevel = false;
     }
 
 }

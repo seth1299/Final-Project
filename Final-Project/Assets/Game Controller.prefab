@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 0}
-  swordCooldown: 0.1
+  swordCooldown: 0.2
   bow: {fileID: 0}
   regenTimer: -0.5
   ammoMax: 10
@@ -150,3 +150,4 @@ MonoBehaviour:
   ammoText: {fileID: 0}
   anim: {fileID: 0}
   bow_SFX: {fileID: 0}
+  bowShotCooldown: 1
