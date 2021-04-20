@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -15,6 +16,15 @@ public class MainMenuController : MonoBehaviour
     public Canvas mainMenuCanvas, aboutMenuCanvas;
 
     private static GameObject hasClearedLevelController;
+    
+    public Image XBOXHowToPlay, PCHowToPlay;
+
+    private int joystickNamesLength = 0;
+
+    void Awake()
+    {
+        joystickNamesLength = Input.GetJoystickNames().Length;
+    }
 
     void Start()
     {
@@ -33,6 +43,16 @@ public class MainMenuController : MonoBehaviour
     public void About()
     {
         menuSelector = 1;
+        if (joystickNamesLength > 0)
+        {
+            PCHowToPlay.enabled = false;
+            XBOXHowToPlay.enabled = true;
+        }
+        else
+        {
+            PCHowToPlay.enabled = true;
+            XBOXHowToPlay.enabled = false;
+        }
         //SceneManager.LoadScene("About");
     }
 

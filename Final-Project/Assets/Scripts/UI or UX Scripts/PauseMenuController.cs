@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -15,6 +16,15 @@ public class PauseMenuController : MonoBehaviour
     // "about" keeps track of if the player is on the "about" screen or not. "true" if the player is on the pause screen, or "false" otherwise.
     // "settings" keeps track of if the player is in the "setting" screen or not. "true" if the player is on the settings screen, or "false" otherwise.
     private bool about = false, settings = false;
+
+    public Image XBox_Pause, PC_Pause;
+
+    private int joystickNamesLength = 0;
+
+    void Awake()
+    {
+        joystickNamesLength = Input.GetJoystickNames().Length;
+    }
 
     // Start() is called once at the Scene load.
     void Start()
@@ -70,6 +80,16 @@ public class PauseMenuController : MonoBehaviour
     public void AboutMenu()
     {
         about = true;
+        if (joystickNamesLength > 0)
+        {
+            XBox_Pause.enabled = true;
+            PC_Pause.enabled = false;
+        }
+        else
+        {
+            PC_Pause.enabled = true;
+            XBox_Pause.enabled = false;
+        }
     }
 
     public void SettingsMenu()

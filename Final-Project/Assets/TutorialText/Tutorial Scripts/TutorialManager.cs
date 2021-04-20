@@ -42,7 +42,7 @@ void Update ()
     {
 
     
-    if (levelController.GetComponent<HasClearedLevelController>().GetTutorial())
+    if (levelController != null && levelController.GetComponent<HasClearedLevelController>().GetTutorial())
     {
         if ( usingXboxController == 0 )
         {
