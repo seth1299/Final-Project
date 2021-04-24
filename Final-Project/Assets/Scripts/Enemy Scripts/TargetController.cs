@@ -33,6 +33,7 @@ public class TargetController : MonoBehaviour
     
     void OnCollisionEnter(Collision hit)
     {
+        Debug.Log(gameObject + " is hit by something");
         if (hit.gameObject.tag == "Projectile")
         {
             if (hit.gameObject.GetComponent<ProjectileController>().type == false && health > 0)
@@ -57,6 +58,10 @@ public class TargetController : MonoBehaviour
         else if (hit.gameObject.tag == "Terrain" || hit.gameObject.tag == "Solid")
         {
             touchingSolid = true;
+        }
+        else if (hit.gameObject.tag == "Player")
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3);
         }
     }
 

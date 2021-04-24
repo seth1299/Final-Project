@@ -57,7 +57,8 @@ public class HasClearedLevelController : MonoBehaviour
     {
         GameObject temp = GameObject.FindWithTag("Dummy");
         GameObject temp2 = GameObject.FindWithTag("BasicEnemy");
-        GameObject temp3 = GameObject.FindWithTag("TutorialManager");            
+        GameObject temp3 = GameObject.FindWithTag("TutorialManager");        
+        GameObject temp4 = GameObject.FindWithTag("InfectedTree");    
 
         if (temp == null && temp2 == null)
         {
@@ -65,7 +66,7 @@ public class HasClearedLevelController : MonoBehaviour
             {
                 hasBeatenTutorial = true;
             }
-            else if ( name == "Terrain Builder" )
+            else if ( name == "Terrain Builder" && temp4 == null )
             {
                 hasBeatenFirstLevel = true;
             }

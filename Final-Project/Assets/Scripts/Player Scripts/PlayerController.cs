@@ -271,9 +271,9 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        else if (entered.gameObject.tag == "Ammunition")
+        else if (entered.gameObject.tag == "Ammunition" && gc.GetAmmo() < gc.GetAmmoMax())
         {
-            gc.SetAmmo(1);
+            gc.SetAmmo(3);
             Destroy(entered.gameObject);
         }
         else if (entered.gameObject.tag == "BasicEnemy" && this.gameObject.tag != "Sword" && canBeHit)
@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Solid")
+        if (other.gameObject.tag == "Solid" || other.gameObject.tag == "Terrain")
         {
             touchingSolid = false;
         }
@@ -328,7 +328,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Hit", true);
         canBeHit = false;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         /*
         for (int i = 0; i < 120; i++)

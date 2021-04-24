@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 1fc8956c0d9492a4a8c47e3707251258
-  - enabled: 1
-    path: Assets/Scenes/Old Tutorial/TutorialReal.unity
-    guid: 30aad18dc73c5c14f8823c99e2877a94
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/Scenes/Tutorial.unity
     guid: d21cb48c131dce041bd0d265a4ce7e9a
@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Suspicious Sands.unity
     guid: 488cc46054b25d54eab300c4097531b1
+  - enabled: 1
+    path: Assets/Scenes/TutorialReal.unity
+    guid: d1e1e4970b348d846b46908f9e583257
   m_configObjects: {}

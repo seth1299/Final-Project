@@ -185,12 +185,6 @@ public class GameController : MonoBehaviour
             ShootBow();
         }
 
-        // This is for doing the cure ability.
-        if (Input.GetButtonDown("Cure Ability Keyboard") || Input.GetButtonDown("Cure Ability Controller") && !isSwinging)
-        {
-            DoMagic();
-        }
-
         // This is for unequiping everything.
         if (Input.GetButtonDown("Unequip Everything Keyboard") || Input.GetButtonDown("Unequip Everything Controller") && !isSwinging)
         {
@@ -201,6 +195,18 @@ public class GameController : MonoBehaviour
         }
         }
         justStarted = false;
+    }
+
+    void LateUpdate()
+    {
+        if ( ( !playerIsDead && ( !playerCuredAllEnemies || SceneManager.GetActiveScene().name == "TutorialReal" ) ) && ( SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "Defeat") )
+        {
+            // This is for doing the cure ability.
+            if (Input.GetButtonDown("Cure Ability Keyboard") || Input.GetButtonDown("Cure Ability Controller") && !isSwinging)
+            {
+                DoMagic();
+            }
+        }
     }
 
     // This updates the ammo, mana, and health GUI to match the actual values for ammo and health.
@@ -384,6 +390,12 @@ public class GameController : MonoBehaviour
     public int GetAmmo()
     {
         return ammo;
+    }
+
+    // GetAmmoMax() returns the "ammoMax" variable.
+    public int GetAmmoMax()
+    {
+        return ammoMax;
     }
 
     // This changes the ammo to the current ammo plus whatever value is passed in the parameter.
