@@ -48,6 +48,8 @@ public class PauseMenuController : MonoBehaviour
                 isPaused = true;
             if ( about )
                 about = false;
+            if ( settings )
+                settings = false;
         }
 
         // This makes the pause menu "appear" and "disappear" at the appropriate times (when paused or the about menu is clicked)

@@ -2473,7 +2473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223f63f6ad15c9748a7f3495c6caf3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookDist: 50
+  lookDist: 200
   navPoints:
   - {fileID: 1404721342}
   - {fileID: 1884741447}
@@ -2580,7 +2580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9143747820960767861, guid: 7876ba1babd823944baa5dcdbaa853f0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.06657188
+      value: 0.06657187
       objectReference: {fileID: 0}
     - target: {fileID: 9143747820960767861, guid: 7876ba1babd823944baa5dcdbaa853f0, type: 3}
       propertyPath: m_LocalRotation.w

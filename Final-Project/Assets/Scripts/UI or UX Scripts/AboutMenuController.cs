@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AboutMenuController : MonoBehaviour
 {
@@ -16,6 +17,14 @@ public class AboutMenuController : MonoBehaviour
     [Tooltip("'isInAboutMenu' tracks if the player is in the 'About' menu or not. 'true' if the player is in the 'About' menu, or 'false' otherwise.")]
     public bool isInAboutMenu = false, isInSettingsMenu = false;
 
+    [Tooltip("This is the Image of Xbox Controls.")]
+    public Image Xbox_Controls;
+
+    [Tooltip("This is the Image of PC Controls.")]
+    public Image PC_Controls;
+
+    private int joystickNamesLength;
+
     // Start() is called once at the beginning of the Scene load.
     void Start()
     {
@@ -24,6 +33,8 @@ public class AboutMenuController : MonoBehaviour
 
         // This disables the "about" menu at the start of the game so that it doesn't show up on accident.
         thisSameCanvas.enabled = false;
+
+        joystickNamesLength = Input.GetJoystickNames().Length;
     }
 
     // Update is called once per frame.
@@ -41,6 +52,16 @@ public class AboutMenuController : MonoBehaviour
         if ( isInAboutMenu )
         {
             thisSameCanvas.enabled = true;
+            if ( joystickNamesLength > 0 )
+            {
+                Xbox_Controls.enabled = true;
+                PC_Controls.enabled = false;
+            }
+            else
+            {
+                Xbox_Controls.enabled = false;
+                PC_Controls.enabled = true;
+            }
         if (settingsCanvas != null)
             settingsCanvas.enabled = false;
         }

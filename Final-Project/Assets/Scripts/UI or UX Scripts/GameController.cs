@@ -154,6 +154,22 @@ public class GameController : MonoBehaviour
         if ( ( !playerIsDead && ( !playerCuredAllEnemies || SceneManager.GetActiveScene().name == "TutorialReal" ) ) && ( SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Victory" && SceneManager.GetActiveScene().name != "Defeat") )
         {
 
+        if ( GameObject.FindWithTag("LevelController") != null )
+        {
+            if ( GameObject.FindWithTag("LevelController").GetComponent<HasClearedLevelController>().GetPlayerInvincibility())
+            {
+                SetHealth(healthMax);
+            }
+            if ( GameObject.FindWithTag("LevelController").GetComponent<HasClearedLevelController>().GetPlayerInfiniteAmmo())
+            {
+                SetAmmo(ammoMax);
+            }
+            if ( GameObject.FindWithTag("LevelController").GetComponent<HasClearedLevelController>().GetPlayerInfiniteMana())
+            {
+                SetMana(manaMax);
+            }
+        }
+
         //Debug.Log("Working");
 
         // This checks if the player is pressing the button to pause the game.

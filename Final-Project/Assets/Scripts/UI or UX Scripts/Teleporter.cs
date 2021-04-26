@@ -16,7 +16,6 @@ public class Teleporter : MonoBehaviour
             {
                 if ( SceneManager.GetActiveScene().name == "TutorialReal" )
                 {
-                    Debug.Log("Working as intended");
                     /*
                     Magicians_Meadow_Fence = GameObject.Find("Magicians_Meadow_Fence");
                     Suspicious_Sands_Fence = GameObject.Find("Suspicious_Sands_Fence");

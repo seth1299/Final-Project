@@ -1283,7 +1283,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &107078617 stripped
 Transform:
@@ -9274,30 +9274,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566712960}
     m_Modifications:
-    - target: {fileID: 5566827572494153798, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566827572494153798, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566827572494153798, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6942941103218821585, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
       propertyPath: pauseMenuCanvas
       value: 
       objectReference: {fileID: 3485406132810582883}
-    - target: {fileID: 8403871492764578914, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8403871492764578914, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8773971158321107396, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
       propertyPath: m_Name
       value: Settings Menu Canvas
@@ -9385,10 +9365,6 @@ PrefabInstance:
     - target: {fileID: 8773971158321107403, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8773971159102517217, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -320
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a30bfe02ef526e429778066e3526d83, type: 3}
@@ -9669,15 +9645,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9143747822806096178, guid: 7876ba1babd823944baa5dcdbaa853f0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.26630136
+      value: -0.2663014
       objectReference: {fileID: 0}
     - target: {fileID: 9143747822806096178, guid: 7876ba1babd823944baa5dcdbaa853f0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.05693606
+      value: 0.056936067
       objectReference: {fileID: 0}
     - target: {fileID: 9143747822806096178, guid: 7876ba1babd823944baa5dcdbaa853f0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.20117612
+      value: 0.20117614
       objectReference: {fileID: 0}
     - target: {fileID: 9143747822806096178, guid: 7876ba1babd823944baa5dcdbaa853f0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11111,7 +11087,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &543411082 stripped
 Transform:
@@ -13063,7 +13039,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &700581183 stripped
 Transform:
@@ -13357,7 +13333,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &706479376 stripped
 Transform:
@@ -19504,7 +19480,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &1046052585 stripped
 Transform:
@@ -20880,7 +20856,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &1167533272 stripped
 Transform:
@@ -24753,15 +24729,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7633479593282347182, guid: 3301d38c3024dee418bc7821b9ec1030, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.50455
+      value: 85.74455
       objectReference: {fileID: 0}
     - target: {fileID: 7633479593282347182, guid: 3301d38c3024dee418bc7821b9ec1030, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.574429
+      value: -15.534428
       objectReference: {fileID: 0}
     - target: {fileID: 7633479593282347182, guid: 3301d38c3024dee418bc7821b9ec1030, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -101.700134
+      value: -87.21013
       objectReference: {fileID: 0}
     - target: {fileID: 7633479593282347182, guid: 3301d38c3024dee418bc7821b9ec1030, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25003,7 +24979,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &1421240547 stripped
 Transform:
@@ -36208,6 +36184,17 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 7633479593282347177, guid: 3301d38c3024dee418bc7821b9ec1030, type: 3}
   m_PrefabInstance: {fileID: 1406562745}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2045575667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5835598690069664616, guid: ac79b122bbe327f4eab3fa2056685a8d, type: 3}
+  m_PrefabInstance: {fileID: 3485406132810582882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2046662289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37245,7 +37232,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &2080957447 stripped
 Transform:
@@ -37499,7 +37486,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &2093258708 stripped
 Transform:
@@ -39590,6 +39577,14 @@ PrefabInstance:
       propertyPath: settingsMenuCanvas
       value: 
       objectReference: {fileID: 480582126}
+    - target: {fileID: 7721424120753566318, guid: ac79b122bbe327f4eab3fa2056685a8d, type: 3}
+      propertyPath: XBox_Pause
+      value: 
+      objectReference: {fileID: 2045575667}
+    - target: {fileID: 7721424120753566318, guid: ac79b122bbe327f4eab3fa2056685a8d, type: 3}
+      propertyPath: PC_Pause
+      value: 
+      objectReference: {fileID: 2045575667}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac79b122bbe327f4eab3fa2056685a8d, type: 3}
 --- !u!223 &3485406132810582883 stripped

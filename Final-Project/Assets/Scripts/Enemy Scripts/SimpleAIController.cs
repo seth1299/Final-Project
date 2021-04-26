@@ -69,7 +69,6 @@ public class SimpleAIController : MonoBehaviour
     }
     void GotoNextPoint()
     {
-        Debug.Log("Going to next point...");
         if (navPoints.Length == 0)
         {
             return;

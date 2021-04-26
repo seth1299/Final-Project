@@ -33,7 +33,6 @@ public class TargetController : MonoBehaviour
     
     void OnCollisionEnter(Collision hit)
     {
-        Debug.Log(gameObject + " is hit by something");
         if (hit.gameObject.tag == "Projectile")
         {
             if (hit.gameObject.GetComponent<ProjectileController>().type == false && health > 0)

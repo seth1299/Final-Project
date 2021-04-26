@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class HasClearedLevelController : MonoBehaviour
 {
-    public bool hasBeatenTutorial = false, hasBeatenFirstLevel = false, hasBeatenSecondLevel = false, hasBeatenThirdLevel = false;
+    public bool hasBeatenTutorial = false, hasBeatenFirstLevel = false, hasBeatenSecondLevel = false, hasBeatenThirdLevel = false, playerIsInvincible = false, playerHasInfiniteAmmo = false, playerHasInfiniteMana = false, isFullscreen = true;
+    
+    public int quality;
     private string name = "";
 
     void Awake()
@@ -28,10 +30,16 @@ public class HasClearedLevelController : MonoBehaviour
         GameData data = SaveSystem.LoadData();
         if (data != null)
         {
+        Debug.Log("Loaded data: "+data.quality);
         hasBeatenTutorial = data.hasBeatenTutorial;
         hasBeatenFirstLevel = data.hasBeatenFirstLevel;
         hasBeatenSecondLevel = data.hasBeatenSecondLevel;
         hasBeatenThirdLevel = data.hasBeatenThirdLevel;
+        playerIsInvincible = data.playerIsInvincible;
+        playerHasInfiniteAmmo = data.playerHasInfiniteAmmo;
+        playerHasInfiniteMana = data.playerHasInfiniteMana;
+        isFullscreen = data.isFullscreen;
+        quality = data.quality;
         }
     }
     void OnEnable()
@@ -51,6 +59,60 @@ public class HasClearedLevelController : MonoBehaviour
         {
             SceneManager.LoadScene("Victory");
         }
+    }
+
+    public void TogglePlayerInvincibility()
+    {
+        playerIsInvincible = !playerIsInvincible;
+    }
+
+    public bool GetPlayerInvincibility()
+    {
+        return playerIsInvincible;
+    }
+
+    public void TogglePlayerInfiniteAmmo()
+    {
+        playerHasInfiniteAmmo = !playerHasInfiniteAmmo;
+    }
+
+    public bool GetPlayerInfiniteAmmo()
+    {
+        return playerHasInfiniteAmmo;
+    }
+
+    public void TogglePlayerInfiniteMana()
+    {
+        playerHasInfiniteMana = !playerHasInfiniteMana;
+    }
+
+    public void ToggleFullscreen()
+    {
+        Debug.Log("isFullscreen value before changing: "+isFullscreen);
+        isFullscreen = !isFullscreen;
+        Debug.Log("isFullscreen value after changing: "+isFullscreen);
+    }
+
+    public bool GetPlayerInfiniteMana()
+    {
+        return playerHasInfiniteMana;
+    }
+
+    public bool GetIsFullscreen()
+    {
+        return isFullscreen;
+    }
+
+    public void SetQuality(int param)
+    {
+        Debug.Log("Setting "+quality + " to "+param);
+        quality = param;
+        QualitySettings.SetQualityLevel(param);
+    }
+
+    public int GetQuality()
+    {
+        return quality;
     }
 
     void Update()
@@ -107,6 +169,11 @@ public class HasClearedLevelController : MonoBehaviour
         hasBeatenFirstLevel = false;
         hasBeatenSecondLevel = false;
         hasBeatenThirdLevel = false;
+        isFullscreen = true;
+        quality = 0;
+        playerIsInvincible = false;
+        playerHasInfiniteAmmo = false;
+        playerHasInfiniteMana = false;
     }
 
 }

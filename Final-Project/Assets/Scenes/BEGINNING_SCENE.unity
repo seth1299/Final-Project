@@ -170,3 +170,6 @@ MonoBehaviour:
   hasBeatenFirstLevel: 0
   hasBeatenSecondLevel: 0
   hasBeatenThirdLevel: 0
+  playerIsInvincible: 0
+  playerHasInfiniteAmmo: 0
+  playerHasInfiniteMana: 0
