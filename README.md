@@ -36,6 +36,7 @@ unity3d.com
 
 
 Basic Requirements: 
+
 ●	The game is played in 3rd person view in Unity 3D. It also has a First-Person mode that is toggleable by right clicking (pressing down the Right Analog Stick on Xbox One controller).
 ●	The game has both keyboard / mouse and Xbox One controller support.
 ●	The game has UI elements or a HUD system that indicates important information.
@@ -62,6 +63,7 @@ Level Requirements:
 
 
 Art Requirements: 
+
 The art is fully finished within the game. 
 The art segment of the rubric is completed and fulfilled as it includes the following:
 ●	The Player Character has 3 animations: Idle, hit, and walk.
@@ -85,6 +87,7 @@ unity3d.com
 ●	Original music arrangements for all three levels are created by Emma Jean Branch.
 
 Tech Requirements:
+
 Game’s level and menus were designed, in full, by the tech members. The requirements for the tech portions of the game are fulfilled and completed as follows:
 The following menus are finalized:
 ●	Main menu with "Start Game," "How to Play”, and "Quit" buttons as well as the addition of a “Delete ALL Saved Data” button.
@@ -95,6 +98,7 @@ The following menus are finalized:
 
 
 Code Requirements:
+
 ●	The requirements for the coding portions of the project are all fulfilled and completed as follows:
 ●	The player is able to use all three significant mechanics: Sword, Bow and Curing. The sword is for close combat, the bow is for distance combat and the curing mechanic is for curing slime enemies as well as infected trees.
 ●	The game is pausable by pressing the “P” button (and on Xbox One controller it is the “Start” button). Not only that, but the display text on the pause menu automatically changes based on whether or not an Xbox One controller is detected. If an Xbox One controller is detected, it will say “press Start to unpause”, but if there is no Xbox One controller it will say “Press P to unpause”.
